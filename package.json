@@ -1,0 +1,28 @@
+{
+  "name": "mood-tracker-app",
+  "version": "1.0.0",
+  "description": "This app allows you to track your moods at three given points during each day by selecting a color that you feel best matches your current feelings.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HeyStenson/mood-tracker-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HeyStenson/mood-tracker-app/issues"
+  },
+  "homepage": "https://github.com/HeyStenson/mood-tracker-app#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.13.3",
+    "cookie-parser": "^1.3.5",
+    "ejs": "^2.3.3",
+    "express": "^4.13.3",
+    "express-session": "^1.11.3",
+    "mongoose": "^4.1.5"
+  }
+}
