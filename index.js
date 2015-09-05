@@ -37,7 +37,7 @@ app.get("/signup", function(req, res){
 });
 
 //API endpoints
-
+//Sign up new user
 app.post(["/signup", "/api/users"], function createUser(req, res){
   console.log("Looks like you're trying to signup!");
   var email = req.body.email;
@@ -48,6 +48,18 @@ app.post(["/signup", "/api/users"], function createUser(req, res){
     //res.cookie("guid", newUser._id, { signed: true });
     res.redirect("/");
   });
+});
+
+//Log in existing user
+app.post(["/login", "/api/sessions"], function createSession(req, res){
+  console.log("Looks like you're trying to login!");
+  var email = req.body.email;
+  var passwordDigest = req.body.passwordDigest;
+  db.User.authenticate({email: email, passwordDigest: passwordDigest}, function(err, user){
+    if (err) {res.send('oops wrong password');}
+		req.login(user);
+		res.redirect('/');
+  	});
 });
 
 //listen up
