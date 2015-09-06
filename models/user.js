@@ -46,24 +46,24 @@ userSchema.statics.createSecure = function (email, password, cb) {
   });
 };
 
-// // authenticate user (for login)
-// userSchema.statics.authenticate = function (email, password, cb) {
-//   // find user by email entered at log in
-//   this.findOne({email: email}, function (err, user) {
-//     // throw error if can't find user
-//     if (user === null) {
-//       cb("Can\'t find user with that email", null);
-//     // if found user, check if password is correct
-//     } else if (user.checkPassword(password)) {
-//       // the user is found & password is correct, so execute callback
-//       // pass no error, just the user to the callback
-//       cb(null, user);
-//     } else {
-//       // user found, but password incorrect
-//       cb("Password incorrect", user)
-//     }
-//   });
-// };
+// authenticate user (for login)
+userSchema.statics.authenticate = function (email, password, cb) {
+  // find user by email entered at log in
+  this.findOne({email: email}, function (err, user) {
+    // throw error if can't find user
+    if (user === null) {
+      cb("Can\'t find user with that email", null);
+    // if found user, check if password is correct
+    } else if (user.checkPassword(password)) {
+      // the user is found & password is correct, so execute callback
+      // pass no error, just the user to the callback
+      cb(null, user);
+    } else {
+      // user found, but password incorrect
+      cb("Password incorrect", user)
+    }
+  });
+};
 
 // // compare password user enters with hashed password (`passwordDigest`)
 // userSchema.methods.checkPassword = function (password) {
