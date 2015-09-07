@@ -65,11 +65,11 @@ userSchema.statics.authenticate = function (email, password, cb) {
   });
 };
 
-// // compare password user enters with hashed password (`passwordDigest`)
-// userSchema.methods.checkPassword = function (password) {
-//   // run hashing algorithm (with salt) on password to compare with stored `passwordDigest`
-//   return bcrypt.compareSync(password, this.passwordDigest);
-// };
+// compare password user enters with hashed password (`passwordDigest`)
+userSchema.methods.checkPassword = function (password) {
+  // run hashing algorithm (with salt) on password to compare with stored `passwordDigest`
+  return bcrypt.compareSync(password, this.passwordDigest);
+};
 
 var Day = mongoose.model("Day", Day);
 var User = mongoose.model("User", userSchema);
