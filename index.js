@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 
@@ -29,6 +30,8 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+app.use(methodOverride("_method"));
 
 //extending the req object to help manage sessions
 app.use(function(req, res, next){
@@ -76,11 +79,6 @@ app.get("/signup", function(req, res){
   res.sendFile(signup_form);
 });
 
-// app.get('/logout', function(req, res){
-//   req.logout();
-//   res.redirect('/');
-// });
-
 //API endpoints
 //Sign up new user
 app.post(["/signup", "/api/users"], function createUser(req, res){
@@ -107,12 +105,19 @@ app.post(["/login", "/api/sessions"], function createSession(req, res){
   db.User.authenticate(email, passwordDigest, function(err, user){
     if (user){
       res.cookie('guid', user._id, {signed: true});
-      res.redirect('/')
+      res.redirect('/');
+      console.log(email);
     } else {
       console.log(err);
       res.redirect('/signup');
     }
   })
+});
+
+//Log user out
+app.delete(['/logout','/api/sessions' ], function (req, res){
+  req.logout();
+  res.redirect('/login');
 });
 
 //listen up
