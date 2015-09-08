@@ -7,6 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!-- jQuery -->
 	<script src="/vendor/jquery/dist/jquery.min.js"></script>
+	<!-- Moment JS -->
+	<script src="/vendor/moment/min/moment.min.js"></script>
 	<!-- Bootstrap JS -->
   	<script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
   	<!-- Bootstrap CSS -->
@@ -44,7 +46,7 @@
 	<div id="page-wrapper" class="container">
 		<main>
 			<div class="jumbotron text-center">
-				<h1>How do you feel?</h1>
+				<div id="time"></div>
 				<div class="row">
 					<div class="mood btn" id="color1" role="button"></div>
 					<div class="mood btn" id="color2" role="button"></div>
@@ -60,6 +62,7 @@
 					<div class="mood btn" id="color8" role="button"></div>
 					<div class="mood btn" id="color9" role="button"></div>
 				</div>	
+				<h1>How do you feel?</h1>
 			</div>
 		</main>
 		<!-- footer -->
