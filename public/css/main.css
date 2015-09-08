@@ -2,6 +2,11 @@ body {
 	background: #eee;
 }
 
+.bg {
+	background-image: url(../img/moodhue-bg.png);
+	background-repeat: repeat;
+}
+
 .wrapper {
 	margin-top: 80px;
 	margin-bottom: 80px;
@@ -57,4 +62,47 @@ input[type="password"] {
   margin-bottom: 20px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.mood {
+	height: 150px;
+	width: 150px;
+	margin: 1px 0 2px 0;
+	display: inline-block;
+}
+
+#color1 {
+	background-color: #FF5757;
+}
+
+#color2 {
+	background-color: #9A5DE8;
+}
+
+#color3 {
+	background-color: #E89C66;
+}
+
+#color4 {
+	background-color: #4F5C58;
+}
+
+#color5 {
+	background-color: #FCFBF0;
+}
+
+#color6 {
+	background-color: #F2A0AF;
+}
+
+#color7 {
+	background-color: #52C0FF;
+}
+
+#color8 {
+	background-color: #FFF37C;
+}
+
+#color9 {
+	background-color: #97FF80;
 }
