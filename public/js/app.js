@@ -18,5 +18,7 @@ function getColor(){
 	$('div.mood').click(function(){
 		var moodNow = $(this).attr('id');
 		console.log(moodNow);
-	})
+		// $('div.dayDiv').
+	});
 }
+

@@ -60,7 +60,7 @@ userSchema.statics.authenticate = function (email, password, cb) {
       cb(null, user);
     } else {
       // user found, but password incorrect
-      cb("Password incorrect", user)
+      cb("Password incorrect", null)
     }
   });
 };
