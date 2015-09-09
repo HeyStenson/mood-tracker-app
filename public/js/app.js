@@ -1,8 +1,5 @@
 $(function(){
 	getHour();
-
-	var today = moment().dayOfYear();
-	console.log(today);
 });
 
 var moodNow;

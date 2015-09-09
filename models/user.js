@@ -6,7 +6,7 @@ var Day = new Schema({
 	morning: String,
 	afternoon: String,
 	evening: String,
-	date: Date
+	date: Number
 });
 
 var userSchema = new Schema({
@@ -75,4 +75,5 @@ userSchema.methods.checkPassword = function (password) {
 var Day = mongoose.model("Day", Day);
 var User = mongoose.model("User", userSchema);
 
-module.exports = User;
+module.exports.User = User;
+module.exports.Day = Day;

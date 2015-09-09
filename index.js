@@ -71,7 +71,7 @@ app.get('/', function (req, res){
 });
 
 app.get("/login", function(req, res){
-  console.log(req.session);
+  //console.log(req.session);
   var login_form = path.join(views, "login.html");
   res.sendFile(login_form);
 });
@@ -95,13 +95,13 @@ app.get('/history', function(req, res){
 //API endpoints
 //Sign up new user
 app.post(["/signup", "/api/users"], function createUser(req, res){
-  console.log("Looks like you're trying to signup!");
+  console.log("A signup!");
   var email = req.body.email;
   var passwordDigest = req.body.passwordDigest;
   db.User.createSecure(email, passwordDigest, function(err, newUser){
     if (newUser){
       req.login(newUser);
-      console.log(newUser.email + " is registered");
+      console.log(newUser);
       res.redirect('/')
     } else {
       console.log(err);
@@ -112,12 +112,13 @@ app.post(["/signup", "/api/users"], function createUser(req, res){
 
 //Log in existing user
 app.post(["/login", "/api/sessions"], function createSession(req, res){
-  console.log("Looks like you're trying to log in!");
+  console.log("A log in!");
   var email = req.body.email;
   var passwordDigest = req.body.passwordDigest;
   db.User.authenticate(email, passwordDigest, function(err, user){
     if (user){
-      console.log(email);
+      //setUserDay(user);
+      console.log(user.days);
       req.login(user);
       res.redirect('/');
     } else {
@@ -133,7 +134,78 @@ app.delete(['/logout','/api/sessions' ], function (req, res){
   res.redirect('/login');
 });
 
+var today = moment().dayOfYear();
+
+//after login, check. if day is set, update day; else create a new day
+//if user.days.date !== today
+function setUserDay(user){
+  //var user = req.currentUser;
+  if (user.days[0].date !== today || user.days === null){
+    var day = new db.Day;
+    day.date = today;
+    user.days.push(day);
+    user.save(function(err, newDay){
+      if (err){
+        return console.log(err);
+      }
+      console.log(newDay);
+    })
+  } else {
+    console.log("already has a day");
+  }
+} 
+
+// function setDayMoods(){
+//   db.User.findOne({id? && date = today?}, function(err, user){
+//     if (err){
+//       return console.log(err);
+//     }
+//     var moodNow = req.body.(value?);
+//     // if morning day.morning = moodNow;
+//     // if afternoon day.afternoon = moodNow;
+//     // if night day.night = moodNow;
+//     user.days.push(moodNow);
+//     user.save(function(err, user){
+//       cb();
+//     });
+//     user.Day.create(moodNow, function(err, mood){
+//     res.send(mood);
+//   })
+// }
+
 //listen up
 app.listen(3000, function(){
   console.log("Server running on localhost:3000");
 })
+
+//from Elias
+// app.post('/history', function(req, res){
+//   var moodNow = req.body;
+//   //get current user
+//   req.currentUser(function(err, user){
+//     // make a new day
+//     var what = new db.Day
+//     // push the mood into user.days
+//     user.days.push()
+//     res.send(mood);
+
+//     // setUserDay(user, mood, function(){
+//     //   res.send(mood);
+//     // })
+//   });
+//   user.Day.create(moodNow, function(err, mood){
+//     res.send(mood);
+//   })
+// });
+
+
+//from me
+// function setUserDay(user, mood, cb) {
+//   var day = new db.Day();
+//   day.morning = mood;
+//   user.days.push(day);
+//   user.save(function(err, user){
+//     cb();
+//   })
+// }
+

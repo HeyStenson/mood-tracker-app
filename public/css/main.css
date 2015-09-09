@@ -64,6 +64,10 @@ input[type="password"] {
   border-top-right-radius: 0;
 }
 
+input.mood {
+	display: inline;
+}
+
 .mood {
 	height: 150px;
 	width: 150px;
