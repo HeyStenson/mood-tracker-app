@@ -9,6 +9,8 @@
 	<script src="/vendor/jquery/dist/jquery.min.js"></script>
 	<!-- Moment JS -->
 	<script src="/vendor/moment/min/moment.min.js"></script>
+	<!-- Underscore JS -->
+	<script src="/vendor/underscore/underscore-min.js"></script>
 	<!-- Bootstrap JS -->
   	<script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
   	<!-- Bootstrap CSS -->
@@ -31,7 +33,7 @@
 			    </div>
 			    <div class="collapse navbar-collapse">
 			      <ul class="nav navbar-nav">
-			        <li class="active"><a href="/history.html">History</a></li>
+			        <li class="active"><a href="/history">History</a></li>
 			      </ul>
 			      <li><form method="post" action="/logout?_method=DELETE">
 						<button class="pull-right" type="submit">Logout</button>
@@ -48,25 +50,25 @@
 			<div class="jumbotron text-center">
 				<div id="time"></div>
 				<div class="row">
-					<div class="mood btn" id="color1" role="button"></div>
-					<div class="mood btn" id="color2" role="button"></div>
-					<div class="mood btn" id="color3" role="button"></div>
+					<div class="mood btn color1" role="button"></div>
+					<div class="mood btn color2" role="button"></div>
+					<div class="mood btn color3" role="button"></div>
 				</div>	
 				<div class="row">	
-					<div class="mood btn" id="color4" role="button"></div>
-					<div class="mood btn" id="color5" role="button"></div>
-					<div class="mood btn" id="color6" role="button"></div>
+					<div class="mood btn color4" role="button"></div>
+					<div class="mood btn color5" role="button"></div>
+					<div class="mood btn color6" role="button"></div>
 				</div>	
 				<div class="row">
-					<div class="mood btn" id="color7" role="button"></div>
-					<div class="mood btn" id="color8" role="button"></div>
-					<div class="mood btn" id="color9" role="button"></div>
+					<div class="mood btn color7" role="button"></div>
+					<div class="mood btn color8" role="button"></div>
+					<div class="mood btn color9" role="button"></div>
 				</div>	
 				<h1>How do you feel?</h1>
-				<div class="row">
-					<div class="mood dayDiv"></div>
-					<div class="mood dayDiv"></div>
-					<div class="mood dayDiv"></div>
+				<div class="row todayMood">
+					<div></div>
+					<div></div>
+					<div></div>
 				</div>
 			</div>
 		</main>

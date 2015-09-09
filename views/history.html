@@ -9,6 +9,8 @@
 	<script src="/vendor/jquery/dist/jquery.min.js"></script>
 	<!-- Moment JS -->
 	<script src="/vendor/moment/min/moment.min.js"></script>
+	<!-- Underscore JS -->
+	<script src="/vendor/underscore/underscore-min.js"></script>
 	<!-- Bootstrap JS -->
   	<script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
   	<!-- Bootstrap CSS -->
@@ -43,9 +45,11 @@
 		<!-- body -->
 	<div id="page-wrapper" class="container">
 		<main>
-			<div class="row moodDiv">
+			<div class="row" id="moodHistory"></div>
 				<!-- append new "mood" divs here -->
-			</div>
+				// <script>
+				// 	<div class="mood"></div>
+				// </script>
 		</main>
 		<!-- footer -->
 		<footer>

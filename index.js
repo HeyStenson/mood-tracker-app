@@ -3,7 +3,6 @@ var app = express();
 var path = require('path');
 var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
-// var cookieParser = require('cookie-parser');
 
 //moment.js for time
 var moment = require('moment');
@@ -19,8 +18,6 @@ app.use("/vendor", express.static("bower_components"));
 
 // body parser config to accept all datatypes
 app.use(bodyParser.urlencoded({extended: true}));
-// parse cookie data
-// app.use(cookieParser('Super Secret'));
 
 //create a session
 app.use(
@@ -56,10 +53,6 @@ app.use(function(req, res, next){
   next();
 });
 
-// parse cookie data
-// var cookieParser = require("cookie-parser");
-// app.use(cookieParser()); 
-
 //set the view engine to ejs
 //app.set('view engine', 'ejs');
 
@@ -88,9 +81,15 @@ app.get("/signup", function(req, res){
 });
 
 app.get('/history', function(req, res){
-  var history = path.join(views, 'history.html');
-  res.sendFile(history);
-})
+  req.currentUser(function (err, user) {
+    if (user === null) {
+      res.redirect("/login");
+    } else {
+      var history = path.join(views, 'history.html');
+      res.sendFile(history);
+    }
+  });
+});
 
 //API endpoints
 //Sign up new user
@@ -102,7 +101,6 @@ app.post(["/signup", "/api/users"], function createUser(req, res){
     if (newUser){
       req.login(newUser);
       console.log(newUser.email + " is registered");
-      
       res.redirect('/')
     } else {
       console.log(err);
@@ -118,27 +116,15 @@ app.post(["/login", "/api/sessions"], function createSession(req, res){
   var passwordDigest = req.body.passwordDigest;
   db.User.authenticate(email, passwordDigest, function(err, user){
     if (user){
-      // res.cookie('guid', user._id, {signed: true});
       console.log(email);
       req.login(user);
       res.redirect('/');
     } else {
       console.log(err);
-      res.redirect('/signup');
+      res.redirect('/login');
     }
   })
 });
-
-// show the current user
-// app.get("/history", function userShow(req, res) {
-//   req.currentUser(function (err, user) {
-//     if (user === null) {
-//       res.redirect("/login");
-//     } else {
-//       res.send("Hello " + user.email);
-//     }
-//   })
-// });
 
 //Log user out
 app.delete(['/logout','/api/sessions' ], function (req, res){

@@ -71,38 +71,43 @@ input[type="password"] {
 	display: inline-block;
 }
 
-#color1 {
+.todayMood {
+	width: 460px;
+	margin: 0 auto;
+}
+
+.color1 {
 	background-color: #FF5757;
 }
 
-#color2 {
+.color2 {
 	background-color: #9A5DE8;
 }
 
-#color3 {
+.color3 {
 	background-color: #E89C66;
 }
 
-#color4 {
+.color4 {
 	background-color: #4F5C58;
 }
 
-#color5 {
+.color5 {
 	background-color: #FCFBF0;
 }
 
-#color6 {
+.color6 {
 	background-color: #F2A0AF;
 }
 
-#color7 {
+.color7 {
 	background-color: #52C0FF;
 }
 
-#color8 {
+.color8 {
 	background-color: #FFF37C;
 }
 
-#color9 {
+.color9 {
 	background-color: #97FF80;
 }
