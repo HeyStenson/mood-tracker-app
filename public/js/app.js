@@ -1,11 +1,14 @@
 $(function(){
 	getHour();
+
+	var today = moment().dayOfYear();
+	console.log(today);
 });
 
 var moodNow;
 
 function getHour(){
-	
+
 	var rightNow = moment().hour();
 	if (rightNow > 0 && rightNow < 12){
 		$('#time').append('<h1>Good morning!</h1>');
@@ -20,10 +23,16 @@ function getHour(){
 };
 
 function getColor(){
+	var clicks = 0;
 	$('div.mood').click(function(){
-		moodNow = $(this).attr('class');
-		console.log(moodNow);
-		$('.todayMood').append('<div class="mood ' + moodNow + '"></div>');
+		if (clicks < 1){
+			moodNow = $(this).attr('class');
+			console.log(moodNow);
+			$('.todayMood').append('<div class="mood ' + moodNow + '"></div>');
+		}
+		clicks++;
 	});
 }
 
+
+ 
