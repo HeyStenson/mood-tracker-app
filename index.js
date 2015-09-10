@@ -153,9 +153,7 @@ var today = moment().dayOfYear();
 
 
 //listen up
-app.listen(3000, function(){
-  console.log("Server running on localhost:3000");
-})
+app.listen(process.env.PORT || 3000);
 
 
 
