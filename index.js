@@ -94,7 +94,7 @@ app.get('/history', function(req, res){
 });
 
 //can I render users to a page?
-app.get('/api/users', function(req, res){
+app.get('/moods', function(req, res){
   db.User.find({}, function(err, success){
     if (err){
       return console.log(err);
@@ -142,6 +142,25 @@ app.post(["/login", "/api/sessions"], function createSession(req, res){
     }
   })
 });
+
+//push moods to user object and redirect to /history
+app.post('/moods', function(req, res){
+  var moodString = req.body.moodInput;
+  
+  req.currentUser(function(err, user){
+    var moodNow = new db.Mood();
+    moodNow.mood = moodString;
+    user.moods.push(moodNow);
+    user.save(function(err){
+      if (err){
+        return console.log(err, moodNow);
+      } else {
+        console.log(moodNow);
+      }
+    })
+  })
+  res.redirect('/history');
+})
 
 //Log user out
 app.delete(['/logout','/api/sessions' ], function (req, res){

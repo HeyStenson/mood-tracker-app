@@ -20,6 +20,11 @@ function getHour(){
 	}
 };
 
+function sendMood(context){
+	var id = context.id;
+	var data = 
+}
+
 // function getColor(){
 
 // 	$('div.mood').click(function(){

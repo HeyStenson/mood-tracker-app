@@ -2,20 +2,13 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 
-var Day = new Schema({
-	morning: {
+var Mood = new Schema({
+	mood: {
     type: String,
-    default: "yellow"
     },
-	   afternoon: {type: String,
-    default: "blue"
-  },
-	 evening: {type: String,
-    default: "red"
-        },
 	date: {
-    type: Number, 
-    default: 1
+    type: Date, 
+    default: Date.now()
   }
 });
 
@@ -35,7 +28,7 @@ var userSchema = new Schema({
 		type: Date, 
 		default: Date.now()
   },
-	days: [Day]
+	moods: [Mood]
 });
 
 // create a new user with secure (hashed) password (for sign up)
@@ -82,8 +75,8 @@ userSchema.methods.checkPassword = function (password) {
   return bcrypt.compareSync(password, this.passwordDigest);
 };
 
-var Day = mongoose.model("Day", Day);
+var Mood = mongoose.model("Mood", Mood);
 var User = mongoose.model("User", userSchema);
 
 module.exports.User = User;
-module.exports.Day = Day;
+module.exports.Mood = Mood;
