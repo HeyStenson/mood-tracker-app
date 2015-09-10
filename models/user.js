@@ -7,10 +7,10 @@ var Day = new Schema({
     type: String,
     default: "yellow"
     },
-	   afternoon: {type: String,
+	 afternoon: {type: String,
     default: "blue"
   },
-	   evening: {type: String,
+	 evening: {type: String,
     default: "red"
         },
 	date: {
