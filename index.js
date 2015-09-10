@@ -87,21 +87,10 @@ app.get('/history', function(req, res){
     if (user === null) {
       res.redirect("/login");
     } else {
-      var history = path.join(views, 'history.html');
-      res.sendFile(history);
+      res.render("/history", {moods: user.moods});
     }
   });
 });
-
-//can I render users to a page?
-app.get('/moods', function(req, res){
-  db.User.find({}, function(err, success){
-    if (err){
-      return console.log(err);
-    }
-    res.send(success);
-  });
-})
 
 //API endpoints
 //Sign up new user
@@ -144,9 +133,8 @@ app.post(["/login", "/api/sessions"], function createSession(req, res){
 });
 
 //push moods to user object and redirect to /history
-app.post('/moods', function(req, res){
+app.post('/history', function(req, res){
   var moodString = req.body.moodInput;
-  
   req.currentUser(function(err, user){
     var moodNow = new db.Mood();
     moodNow.mood = moodString;
@@ -156,10 +144,10 @@ app.post('/moods', function(req, res){
         return console.log(err, moodNow);
       } else {
         console.log(moodNow);
+        res.render("history", {moods: user.moods});
       }
     })
   })
-  res.redirect('/history');
 })
 
 //Log user out

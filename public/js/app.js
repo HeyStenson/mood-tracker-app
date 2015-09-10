@@ -1,6 +1,5 @@
 $(function(){
 	getHour();
-	getUsers();
 });
 
 var moodNow;
@@ -20,29 +19,34 @@ function getHour(){
 	}
 };
 
-function sendMood(context){
-	var id = context.id;
-	var data = 
-}
-
-// function getColor(){
-
-// 	$('div.mood').click(function(){
-
-// 			moodNow = $(this).attr('class');
-// 			console.log(moodNow);
-// 			$('.todayMood').append('<div class="mood ' + moodNow + '"></div>');
-
-
-// 	});
+//var foodTemplateURL = "/static/html/foodTemplate.html";
+// function getFoods() {
+//   $.get("/foods", function(res){ 
+//     var foods = res;
+//     // grab foods template
+//     renderFoods(foods)
+//   });
 // }
 
-//can I render json to the page?
-function getUsers(){
-	$.get('/api/users', function(res){
-		var users = res();
-		$('body').append(users);
-	})
-}
+// function renderFoods(foods) {
+//   // get template through ajax
+//   $.get(foodTemplateURL, function(templateHTML) {
+//     var template = _.template(templateHTML);
+//     // input foods into template and append to parent
+//     var foodItems = foods.map(function(food) {
+//       return template(food);
+//     });
+//     // clear content (for repeated use)
+//     $("#food-ul").html("");
+//     // append foods to ul
+//     $("#food-ul").append(foodItems);
+//   })
+// }
 
-// function renderMoods() 
+// function renderFood(food) {
+//   $.get(foodTemplateURL, function(templateHTML) {
+//     var template = _.template(templateHTML);
+//     // append foods to ul
+//     $("#food-ul").append(template(food));
+//   })
+// }

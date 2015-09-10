@@ -45,18 +45,13 @@
 		<!-- body -->
 	<div id="page-wrapper" class="container">
 		<main>
-			<div class="jumbotron text-center">
-				<div><h1>You felt</h1></div>
-				<div class="mood-display-wrapper">
-					<!-- append new "mood" divs here -->
-					<!-- iterate through moods --> 
-					
-					<% moods.forEach(function(mood){ %>
-						<div class="<%=mood.mood%> mood"></div>
-					<% }); %>
-
-				</div>	
-			</div>
+			<div class="row" id="moodHistory"></div>
+				<!-- append new "mood" divs here -->
+				<!-- iterate through moods --> 
+				
+				<% moods.forEach(fuction(mood){ %>
+					<div class="<%=mood.mood%> mood"></div>
+				<% }); %>
 		</main>
 		<!-- footer -->
 		<footer>
