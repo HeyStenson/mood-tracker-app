@@ -3,10 +3,20 @@ var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 
 var Day = new Schema({
-	morning: String,
-	afternoon: String,
-	evening: String,
-	date: Number
+	morning: {
+    type: String,
+    default: "yellow"
+    },
+	   afternoon: {type: String,
+    default: "blue"
+  },
+	   evening: {type: String,
+    default: "red"
+        },
+	date: {
+    type: Number, 
+    default: 1
+  }
 });
 
 var userSchema = new Schema({

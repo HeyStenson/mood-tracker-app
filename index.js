@@ -4,6 +4,7 @@ var path = require('path');
 var _ = require('underscore');
 var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
+var ejs = require('ejs');
 
 //moment.js for time
 var moment = require('moment');
@@ -55,7 +56,7 @@ app.use(function(req, res, next){
 });
 
 //set the view engine to ejs
-//app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
 
 //routes
 app.get('/', function (req, res){
@@ -117,10 +118,11 @@ app.post(["/login", "/api/sessions"], function createSession(req, res){
   var passwordDigest = req.body.passwordDigest;
   db.User.authenticate(email, passwordDigest, function(err, user){
     if (user){
-      //setUserDay(user);
-      console.log(user.days);
-      req.login(user);
-      res.redirect('/');
+      setUserDay(user, function(){
+        console.log(user.days);
+        req.login(user);
+        res.redirect('/');
+      });
     } else {
       console.log(err);
       res.redirect('/login');
@@ -137,23 +139,80 @@ app.delete(['/logout','/api/sessions' ], function (req, res){
 var today = moment().dayOfYear();
 
 //after login, check. if day is set, update day; else create a new day
-//if user.days.date !== today
-function setUserDay(user){
-  //var user = req.currentUser;
-  if (user.days[0].date !== today || user.days === null){
-    var day = new db.Day;
-    day.date = today;
-    user.days.push(day);
-    user.save(function(err, newDay){
+//write function isDayToday -- returns boolean
+
+
+function setUserDay(user, next){
+
+  
+  console.log(user.days + " 1"); 
+  
+
+  if(user.days.length === 0) {
+      var day = new db.Day;
+      day.date = today;
+      user.days.push(day);
+
+      user.save(function(err, newDay){
       if (err){
-        return console.log(err);
+        console.log(err);
+        next(err, newDay);
+      } else {
+        console.log(newDay);
+        next(null, newDay);
       }
-      console.log(newDay);
     })
+
   } else {
-    console.log("already has a day");
+
+      if(user.days.date && (user.days.date !== today)) {
+
+        var day = new db.Day;
+        day.date = today;
+        user.days.push(day);
+
+        user.save(function(err, newDay){
+        if (err){
+          console.log(err);
+          next(err, newDay);
+        } else {
+          console.log(newDay);
+          next(null, newDay);
+        }
+      })
+
+      } else {
+        var last_day = user.days[user.days.length-1];
+        console.log(last_day.date);
+        var diff = last_day.date - today;
+        if (last_day.date && diff === 0)  {
+        return next(null, last_day);
+      }
+    }
   }
-} 
+}
+ 
+// function setUserDay(user){
+//   if (!user.days.length) {
+//     var day = new db.Day;
+//     day.date = today;
+//     user.days.push(day);
+//   }
+//   var last_date = user.days[user.days.length-1].date
+//   if (last_date !== today){
+//     var day = new db.Day;
+//     day.date = today;
+//     user.days.push(day);
+//     user.save(function(err, newDay){
+//       if (err){
+//         return console.log(err);
+//       }
+//       console.log(newDay);
+//     })
+//   } else {
+//     console.log("already has a day");
+//   }
+// } 
 
 // function setDayMoods(){
 //   db.User.findOne({id? && date = today?}, function(err, user){
