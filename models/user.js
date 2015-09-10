@@ -1,6 +1,4 @@
- mongoose.connect( process.env.MONGOLAB_URI ||
-                      process.env.MONGOHQ_URL || 
-                      "mongoose" )
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 
@@ -9,7 +7,7 @@ var Day = new Schema({
     type: String,
     default: "yellow"
     },
-	 afternoon: {type: String,
+	   afternoon: {type: String,
     default: "blue"
   },
 	 evening: {type: String,
