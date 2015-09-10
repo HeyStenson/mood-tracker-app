@@ -203,25 +203,28 @@ app.listen(3000, function(){
   console.log("Server running on localhost:3000");
 })
 
-// app.post('/history', function(req, res){
-//   //find user?
-//   console.log(req.body.red);
-//   //var moodNow = req.body.name;
-//   //req.body.(.value?)
-//   // if morning day.morning = moodNow;
-//   // if afternoon day.afternoon = moodNow;
-//   // if night day.night = moodNow;
-//   //get current user?
-//   // user.days.push(moodNow);
-//   // user.day.save(function(err, moodNow){
-//   //       if (err){
-//   //         return console.log(err);
-//   //       } else {
-//   //         console.log(moodNow + " added successfully!");
-//   //         res.send(moodNow);
-//   //       }
-//   // });
-// });
+app.post('/history', function(req, res){
+  //find user?
+
+  var moodNow = req.body.moodInput;
+  console.log(moodNow);
+
+  //match date. only add new mood to today's date
+
+  // if morning day.morning = moodNow; -> user.days.push
+  // if afternoon day.afternoon = moodNow;
+  // if night day.night = moodNow;
+  
+  // user.days.push(moodNow);
+  // user.day.save(function(err, moodNow){
+  //       if (err){
+  //         return console.log(err);
+  //       } else {
+  //         console.log(moodNow + " added successfully!");
+  //         res.send(moodNow);
+  //       }
+  // });
+});
 
 
 
