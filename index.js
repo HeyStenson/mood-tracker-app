@@ -125,13 +125,13 @@ app.post(["/signup", "/api/users"], function createUser(req, res){
 
 //Log in existing user
 app.post(["/login", "/api/sessions"], function createSession(req, res){
-  console.log("A log in!");
   var email = req.body.email;
   var passwordDigest = req.body.passwordDigest;
   db.User.authenticate(email, passwordDigest, function(err, user){
     if (user){
       setUserDay(user, function(){
         req.login(user);
+          console.log(user + " logged in!");
         res.redirect('/');
       });
     } else {
@@ -163,15 +163,15 @@ function setUserDay(user, next){
         console.log(err);
         next(err, newDay);
       } else {
-        console.log(newDay);
+        console.log(newDay + " is the user's first day");
         next(null, newDay);
       }
     })
 
   } else {
 
-      if(user.days.date && (user.days.date !== today)) {
-
+      if(user.days.date !== today) {
+        console.log('time to add a new day!');
         var day = new db.Day;
         day.date = today;
         user.days.push(day);
@@ -188,8 +188,8 @@ function setUserDay(user, next){
 
       } else {
         var last_day = user.days[user.days.length-1];
-        console.log(last_day.date);
         var diff = last_day.date - today;
+        console.log(last_day.date + " was the last time you logged in");
         if (last_day.date && diff === 0)  {
           console.log(user.email + " already has a day!")
           return next(null, last_day);
@@ -214,7 +214,7 @@ app.post('/history', function(req, res){
   // if morning day.morning = moodNow; -> user.days.push
   // if afternoon day.afternoon = moodNow;
   // if night day.night = moodNow;
-  
+    
   // user.days.push(moodNow);
   // user.day.save(function(err, moodNow){
   //       if (err){
