@@ -1,5 +1,6 @@
 $(function(){
 	getHour();
+	getUsers;
 });
 
 var moodNow;
@@ -31,5 +32,12 @@ function getColor(){
 	});
 }
 
+//can I render json to the page?
+function getUsers(){
+	$.get('/api/users', function(res){
+		var users = res();
+		$('body').append(users);
+	})
+}
 
  

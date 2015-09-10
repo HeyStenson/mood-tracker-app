@@ -93,17 +93,29 @@ app.get('/history', function(req, res){
   });
 });
 
+//can I render users to a page?
+app.get('/api/users', function(req, res){
+  db.User.find({}, function(err, success){
+    if (err){
+      return console.log(err);
+    }
+    res.send(success);
+  });
+})
+
 //API endpoints
 //Sign up new user
 app.post(["/signup", "/api/users"], function createUser(req, res){
-  console.log("A signup!");
+  //console.log("A signup!");
   var email = req.body.email;
   var passwordDigest = req.body.passwordDigest;
   db.User.createSecure(email, passwordDigest, function(err, newUser){
     if (newUser){
-      req.login(newUser);
-      console.log(newUser);
-      res.redirect('/')
+      setUserDay(newUser, function(){
+        req.login(newUser);
+        console.log(newUser.email + " signed up!");
+        res.redirect('/')
+      });
     } else {
       console.log(err);
       res.redirect('/signup')
@@ -119,7 +131,6 @@ app.post(["/login", "/api/sessions"], function createSession(req, res){
   db.User.authenticate(email, passwordDigest, function(err, user){
     if (user){
       setUserDay(user, function(){
-        console.log(user.days);
         req.login(user);
         res.redirect('/');
       });
@@ -140,13 +151,7 @@ var today = moment().dayOfYear();
 
 //after login, check. if day is set, update day; else create a new day
 //write function isDayToday -- returns boolean
-
-
 function setUserDay(user, next){
-
-  
-  console.log(user.days + " 1"); 
-  
 
   if(user.days.length === 0) {
       var day = new db.Day;
@@ -186,85 +191,37 @@ function setUserDay(user, next){
         console.log(last_day.date);
         var diff = last_day.date - today;
         if (last_day.date && diff === 0)  {
-        return next(null, last_day);
+          console.log(user.email + " already has a day!")
+          return next(null, last_day);
       }
     }
   }
-}
- 
-// function setUserDay(user){
-//   if (!user.days.length) {
-//     var day = new db.Day;
-//     day.date = today;
-//     user.days.push(day);
-//   }
-//   var last_date = user.days[user.days.length-1].date
-//   if (last_date !== today){
-//     var day = new db.Day;
-//     day.date = today;
-//     user.days.push(day);
-//     user.save(function(err, newDay){
-//       if (err){
-//         return console.log(err);
-//       }
-//       console.log(newDay);
-//     })
-//   } else {
-//     console.log("already has a day");
-//   }
-// } 
-
-// function setDayMoods(){
-//   db.User.findOne({id? && date = today?}, function(err, user){
-//     if (err){
-//       return console.log(err);
-//     }
-//     var moodNow = req.body.(value?);
-//     // if morning day.morning = moodNow;
-//     // if afternoon day.afternoon = moodNow;
-//     // if night day.night = moodNow;
-//     user.days.push(moodNow);
-//     user.save(function(err, user){
-//       cb();
-//     });
-//     user.Day.create(moodNow, function(err, mood){
-//     res.send(mood);
-//   })
-// }
+};
 
 //listen up
 app.listen(3000, function(){
   console.log("Server running on localhost:3000");
 })
 
-//from Elias
 // app.post('/history', function(req, res){
-//   var moodNow = req.body;
-//   //get current user
-//   req.currentUser(function(err, user){
-//     // make a new day
-//     var what = new db.Day
-//     // push the mood into user.days
-//     user.days.push()
-//     res.send(mood);
-
-//     // setUserDay(user, mood, function(){
-//     //   res.send(mood);
-//     // })
-//   });
-//   user.Day.create(moodNow, function(err, mood){
-//     res.send(mood);
-//   })
+//   //find user?
+//   console.log(req.body.red);
+//   //var moodNow = req.body.name;
+//   //req.body.(.value?)
+//   // if morning day.morning = moodNow;
+//   // if afternoon day.afternoon = moodNow;
+//   // if night day.night = moodNow;
+//   //get current user?
+//   // user.days.push(moodNow);
+//   // user.day.save(function(err, moodNow){
+//   //       if (err){
+//   //         return console.log(err);
+//   //       } else {
+//   //         console.log(moodNow + " added successfully!");
+//   //         res.send(moodNow);
+//   //       }
+//   // });
 // });
 
 
-//from me
-// function setUserDay(user, mood, cb) {
-//   var day = new db.Day();
-//   day.morning = mood;
-//   user.days.push(day);
-//   user.save(function(err, user){
-//     cb();
-//   })
-// }
 

@@ -32,12 +32,12 @@
 			      	</button>
 			    </div>
 			    <div class="collapse navbar-collapse">
-			      <ul class="nav navbar-nav">
+			      <!-- <ul class="nav navbar-nav">
 			        <li class="active"><a href="/history">History</a></li>
-			      </ul>
-			      <li><form method="post" action="/logout?_method=DELETE">
-						<button class="pull-right" type="submit">Logout</button>
-					</form></li>
+			      </ul> -->
+			      <form method="post" action="/logout?_method=DELETE">
+						<button class="pull-right btn-link logout-btn" type="submit">Log Out</button>
+					</form>
 				</div> <!-- .nav-collapse -->
 			</div>
 		</nav>
@@ -49,68 +49,68 @@
 		<main>
 			<div class="jumbotron text-center">
 				<div id="time"></div>
-				
-					<div class="row">
-						<form action="/history" method="POST">
-							<div role="button">
-								<input type="hidden" value="red">
-								<input type="submit" class="mood btn color1" style="color: transparent;">
-							</div>
-						</form>
-						<form action="/history" method="POST">
-							<div role="button">
-								<input type="hidden" value="purple">
-								<input type="submit" class="mood btn color2" style="color: transparent;">
-							</div>
-						</form>
-						<form action="/history" method="POST">
-							<div role="button">
-								<input type="hidden" value="orange">
-								<input type="submit" class="mood btn color3" style="color: transparent;">
-							</div>
-						</form>
-					</div>	
-					<div class="row">
-						<form action="/history" method="POST">
-							<div role="button">
-								<input type="hidden" value="black">
-								<input type="submit" class="mood btn color4" style="color: transparent;">
-							</div>
-						</form>
-						<form action="/history" method="POST">
-							<div role="button">
-								<input type="hidden" value="white">
-								<input type="submit" class="mood btn color5" style="color: transparent;">
-							</div>
-						</form>
-						<form action="/history" method="POST">
-							<div role="button">
-								<input type="hidden" value="pink">
-								<input type="submit" class="mood btn color6" style="color: transparent;">
-							</div>
-						</form>	
-					</div>	
-					<div class="row">
-						<form action="/history" method="POST">
-							<div role="button">
-								<input type="hidden" value="blue">
-								<input type="submit" class="mood btn color7" style="color: transparent;">
-							</div>
-						</form>
-						<form action="/history" method="POST">
-							<div role="button">
-								<input type="hidden" value="yellow">
-								<input type="submit" class="mood btn color8" style="color: transparent;">
-							</div>
-						</form>
-						<form action="/history" method="POST">
-							<div role="button">
-								<input type="hidden" value="green">
-								<input type="submit" class="mood btn color9" style="color: transparent;">
-							</div>
-						</form>	
-					</div>	
-				
+					<div class="mood-display-wrapper">
+						<div class="row">
+							<form action="/history" method="POST">
+								<div role="button">
+									<input type="hidden" name="red">
+									<input type="submit" class="mood btn color1" style="color: transparent;">
+								</div>
+							</form>
+							<form action="/history" method="POST">
+								<div role="button">
+									<input type="hidden" name="purple">
+									<input type="submit" class="mood btn color2" style="color: transparent;">
+								</div>
+							</form>
+							<form action="/history" method="POST">
+								<div role="button">
+									<input type="hidden" name="orange">
+									<input type="submit" class="mood btn color3" style="color: transparent;">
+								</div>
+							</form>
+						</div>	
+						<div class="row">
+							<form action="/history" method="POST">
+								<div role="button">
+									<input type="hidden" name="black">
+									<input type="submit" class="mood btn color4" style="color: transparent;">
+								</div>
+							</form>
+							<form action="/history" method="POST">
+								<div role="button">
+									<input type="hidden" name="white">
+									<input type="submit" class="mood btn color5" style="color: transparent;">
+								</div>
+							</form>
+							<form action="/history" method="POST">
+								<div role="button">
+									<input type="hidden" name="pink">
+									<input type="submit" class="mood btn color6" style="color: transparent;">
+								</div>
+							</form>	
+						</div>	
+						<div class="row">
+							<form action="/history" method="POST">
+								<div role="button">
+									<input type="hidden" name="blue">
+									<input type="submit" class="mood btn color7" style="color: transparent;">
+								</div>
+							</form>
+							<form action="/history" method="POST">
+								<div role="button">
+									<input type="hidden" name="yellow">
+									<input type="submit" class="mood btn color8" style="color: transparent;">
+								</div>
+							</form>
+							<form action="/history" method="POST">
+								<div role="button">
+									<input type="hidden" name="green">
+									<input type="submit" class="mood btn color9" style="color: transparent;">
+								</div>
+							</form>	
+						</div>	
+					</div>
 				<h1>How do you feel?</h1>
 
 			</div>
