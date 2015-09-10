@@ -1,4 +1,6 @@
-var mongoose = require('mongoose');
+ mongoose.connect( process.env.MONGOLAB_URI ||
+                      process.env.MONGOHQ_URL || 
+                      "mongoose" )
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 
