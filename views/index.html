@@ -32,7 +32,6 @@
 			      	</button>
 			    </div>
 			    <div class="collapse navbar-collapse">
-			      <!-- <button class="pull-left btn-link logout-btn"><a href="/history.ejs">Your History</a></button> -->
 			      <form method="post" action="/logout?_method=DELETE">
 						<button class="pull-right btn-link logout-btn" type="submit">Log Out</button>
 					</form>
@@ -47,6 +46,7 @@
 		<main>
 			<div class="jumbotron text-center">
 				<div id="time"></div>
+				<div id="day"></div>
 					<div class="mood-display-wrapper">
 						<div class="row">
 							<form action="/history" method="POST">

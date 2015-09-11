@@ -9,7 +9,7 @@ var ejs = require('ejs');
 //moment.js for time
 var moment = require('moment');
 moment().format();
-app.locals.moment = moment();
+app.locals.moment = require("moment");
 
 var views = path.join(process.cwd(), 'views/');
 var db = require('./models');
@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 //create a session
 app.use(
   session({
-    secret: 'super-secret-private-keyyy',
+    secret: 'good-mood-happy-time',
     resave: false,
     saveUninitialized: true,
   })
@@ -96,21 +96,15 @@ app.get('/history', function(req, res){
 //API endpoints
 //Sign up new user
 app.post(["/signup", "/api/users"], function createUser(req, res){
-  //console.log("A signup!");
   var email = req.body.email;
   var passwordDigest = req.body.passwordDigest;
   db.User.createSecure(email, passwordDigest, function(err, newUser){
     if (newUser){
-      
       req.login(newUser);
-      console.log(newUser.email + " signed up!");
       res.redirect('/')
-      
     } else {
-
       console.log(err);
       res.redirect('/signup');
-
     }
   });
 });
@@ -121,11 +115,8 @@ app.post(["/login", "/api/sessions"], function createSession(req, res){
   var passwordDigest = req.body.passwordDigest;
   db.User.authenticate(email, passwordDigest, function(err, user){
     if (user){
-
         req.login(user);
-        console.log(user.email + " logged in!");
         res.redirect('/');
-      
     } else {
       console.log(err);
       res.redirect('/login');
@@ -144,7 +135,6 @@ app.post('/history', function(req, res){
       if (err){
         return console.log(err, moodNow);
       } else {
-        console.log(moodNow);
         res.render("history", {moods: user.moods});
       }
     })
@@ -156,9 +146,6 @@ app.delete(['/logout','/api/sessions' ], function (req, res){
   req.logout();
   res.redirect('/login');
 });
-
-var today = moment().dayOfYear();
-
 
 //listen up
 app.listen(process.env.PORT || 3000);

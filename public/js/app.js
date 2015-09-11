@@ -1,8 +1,7 @@
 $(function(){
 	getHour();
+	getDay();
 });
-
-var moodNow;
 
 function getHour(){
 
@@ -19,3 +18,8 @@ function getHour(){
 	}
 };
 
+function getDay(){
+	var now = moment();
+	var todayIs = moment(now).format('dddd');
+	$('#day').append("<h3>It's " + todayIs + "</h3>");
+}
