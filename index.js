@@ -9,6 +9,7 @@ var ejs = require('ejs');
 //moment.js for time
 var moment = require('moment');
 moment().format();
+app.locals.moment = moment();
 
 var views = path.join(process.cwd(), 'views/');
 var db = require('./models');
@@ -122,7 +123,7 @@ app.post(["/login", "/api/sessions"], function createSession(req, res){
     if (user){
 
         req.login(user);
-        console.log(user + " logged in!");
+        console.log(user.email + " logged in!");
         res.redirect('/');
       
     } else {

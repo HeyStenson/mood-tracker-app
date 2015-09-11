@@ -32,8 +32,8 @@
 			      	</button>
 			    </div>
 			    <div class="collapse navbar-collapse">
-			  
-			      <form method="post" action="/logout?_method=DELETE">
+			  		<button class="pull-left btn-link logout-btn"><a href="/">Add Another?</a></button>
+			      	<form method="post" action="/logout?_method=DELETE">
 						<button class="pull-right btn-link logout-btn" type="submit">Log Out</button>
 					</form>
 				</div> <!-- .nav-collapse -->
@@ -45,14 +45,16 @@
 		<!-- body -->
 	<div id="page-wrapper" class="container">
 		<main>
-			<div class="jumbotron text-center">
+			<div class="jumbotron 	text-center">
 				<div><h1>You felt</h1></div>
 				<div class="mood-display-wrapper">
 					<!-- append new "mood" divs here -->
 					<!-- iterate through moods --> 
 					
 					<% moods.forEach(function(mood){ %>
-						<div class="<%=mood.mood%> mood"></div>
+						<div class="<%=mood.mood%> small-mood">
+							<!-- <span class="date"><%=mood.date%></span> -->
+						</div>
 					<% }); %>
 
 				</div>	
@@ -63,6 +65,7 @@
 			<p class="footer navbar-fixed-bottom text-center text-muted">© 2015 Heather Stenson</p>
 		</footer>
 	</div>
+
 </body>
 </html>
 

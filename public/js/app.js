@@ -19,34 +19,3 @@ function getHour(){
 	}
 };
 
-//var foodTemplateURL = "/static/html/foodTemplate.html";
-// function getFoods() {
-//   $.get("/foods", function(res){ 
-//     var foods = res;
-//     // grab foods template
-//     renderFoods(foods)
-//   });
-// }
-
-// function renderFoods(foods) {
-//   // get template through ajax
-//   $.get(foodTemplateURL, function(templateHTML) {
-//     var template = _.template(templateHTML);
-//     // input foods into template and append to parent
-//     var foodItems = foods.map(function(food) {
-//       return template(food);
-//     });
-//     // clear content (for repeated use)
-//     $("#food-ul").html("");
-//     // append foods to ul
-//     $("#food-ul").append(foodItems);
-//   })
-// }
-
-// function renderFood(food) {
-//   $.get(foodTemplateURL, function(templateHTML) {
-//     var template = _.template(templateHTML);
-//     // append foods to ul
-//     $("#food-ul").append(template(food));
-//   })
-// }
