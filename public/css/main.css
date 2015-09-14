@@ -21,7 +21,7 @@ body {
 	margin-bottom: 80px;
 }
 
-.form-signin {
+.form-signin, .form-signup {
 	width: 500px;
 	height: 500px;
 	padding: 15px 35px 45px;
