@@ -98,6 +98,7 @@ app.get('/history', function(req, res){
 app.post(["/signup", "/api/users"], function createUser(req, res){
   var email = req.body.email;
   var passwordDigest = req.body.passwordDigest;
+  console.log("Signup", email, passwordDigest);
   db.User.createSecure(email, passwordDigest, function(err, newUser){
     if (newUser){
       req.login(newUser);
@@ -111,15 +112,19 @@ app.post(["/signup", "/api/users"], function createUser(req, res){
 
 //Log in existing user
 app.post(["/login", "/api/sessions"], function createSession(req, res){
+  console.log("REQ-----", req.body);
   var email = req.body.email;
   var passwordDigest = req.body.passwordDigest;
+  console.log("LOGIN:", email, passwordDigest);
   db.User.authenticate(email, passwordDigest, function(err, user){
     if (user){
         req.login(user);
-        res.redirect('/');
+        console.log("User exists, going to /");
+        res.send('/');
     } else {
-      console.log(err);
-      res.redirect('/login');
+      console.log("ERROR", err);
+
+      res.status(404).send(err); // display message
     }
   })
 });
